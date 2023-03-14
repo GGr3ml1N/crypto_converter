@@ -26,13 +26,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="@string/favorites_title"
-                android:textColor="@color/black" />
+                android:text="@string/favorites_title" />
 
         </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:id="@+id/tv_charts"
+            style="@style/SubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

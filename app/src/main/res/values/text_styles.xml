@@ -3,12 +3,13 @@
     <style name="TitleStyle">
         <item name="fontFamily">@font/montserrat_bold</item>
         <item name="android:textSize">26sp</item>
+        <item name="android:textColor">?attr/title_color</item>
     </style>
 
     <style name="ModelTitleStyle">
         <item name="fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?attr/main_text_color</item>
     </style>
 
     <style name="ModelHintStyle">
@@ -26,6 +27,12 @@
     <style name="CostStyle">
         <item name="fontFamily">@font/montserrat_light</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?attr/main_text_color</item>
+    </style>
+
+    <style name="SubText">
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey</item>
     </style>
 </resources>

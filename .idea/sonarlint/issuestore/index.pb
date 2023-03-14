@@ -13,3 +13,5 @@ A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+q
+Aapp/src/main/java/com/ggr3ml1n/cryptoconverter/ui/MainActivity.kt,9\c\9cb49aa16c58bfee7b590d975fbd77909bf342c9
