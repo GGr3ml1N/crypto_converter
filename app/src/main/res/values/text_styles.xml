@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TitleStyle">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="ModelTitleStyle">
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ModelHintStyle">
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="PercentStyle">
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="CostStyle">
+        <item name="fontFamily">@font/montserrat_light</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>

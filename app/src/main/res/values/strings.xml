@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Crypto Converter</string>
+
+    <!-- fragment_favorites -->
+    <string name="favorites_title">Отслеживаемые</string>
+    <string name="charts">Чарты</string>
+
 </resources>
