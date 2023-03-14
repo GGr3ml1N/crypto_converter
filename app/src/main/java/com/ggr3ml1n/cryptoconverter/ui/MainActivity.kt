@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ggr3ml1n.cryptoconverter.R
 import com.ggr3ml1n.cryptoconverter.databinding.ActivityMainBinding
+import com.ggr3ml1n.cryptoconverter.ui.profile.ProfileFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding : ActivityMainBinding? = null
@@ -17,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setFragment(FavoritesFragment.newInstance(), this)
+        setFragment(ProfileFragment.newInstance(), this)
     }
 
     private fun setFragment(newFrag: Fragment, activity: AppCompatActivity) {

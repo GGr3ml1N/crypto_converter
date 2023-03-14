@@ -3,6 +3,7 @@
 
     <!-- fragment_favorites -->
     <string name="favorites_title">Отслеживаемые</string>
+    <string name="profile_title">Профиль</string>
     <string name="charts">Чарты</string>
 
 </resources>

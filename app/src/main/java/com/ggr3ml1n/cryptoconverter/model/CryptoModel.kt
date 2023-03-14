@@ -1,4 +1,4 @@
-package com.ggr3ml1n.cryptoconverter.dataclasses
+package com.ggr3ml1n.cryptoconverter.model
 
 data class CryptoModel(
     val iconImage: Int,

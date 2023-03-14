@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ggr3ml1n.cryptoconverter.R
 import com.ggr3ml1n.cryptoconverter.adapters.FavoritesAdapter
 import com.ggr3ml1n.cryptoconverter.databinding.FragmentFavoritesBinding
-import com.ggr3ml1n.cryptoconverter.dataclasses.CryptoModel
+import com.ggr3ml1n.cryptoconverter.model.CryptoModel
 
 class FavoritesFragment : Fragment() {
 
@@ -35,7 +35,8 @@ class FavoritesFragment : Fragment() {
         binding.rcFavorites.adapter = adapter
 
         //Тут я добавил тестовую модельку для того, чтобы посмотреть как она отображается на RCView
-        adapter.add(CryptoModel(
+        adapter.add(
+            CryptoModel(
             R.drawable.sample_icon,
             "BTC",
             "Bitcoin",
@@ -43,7 +44,8 @@ class FavoritesFragment : Fragment() {
             "$ 29850.15",
             "1.12412 BTC",
             "54.21%"
-        ))
+        )
+        )
     }
 
     companion object {

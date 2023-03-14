@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ggr3ml1n.cryptoconverter.R
 import com.ggr3ml1n.cryptoconverter.databinding.CryptoItemBinding
-import com.ggr3ml1n.cryptoconverter.dataclasses.CryptoModel
+import com.ggr3ml1n.cryptoconverter.model.CryptoModel
 
 class FavoritesAdapter : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
 
