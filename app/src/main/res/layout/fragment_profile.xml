@@ -1,70 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="12dp"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/TitleStyle"
-            android:layout_width="wrap_content"
+    <!--
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="@string/profile_title"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
 
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/TitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/profile_title"
+                android:textColor="@color/black" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp">
+        </androidx.appcompat.widget.Toolbar>-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_avatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/iv_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:minWidth="128dp"
-            android:minHeight="128dp" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_icon" />
+    </androidx.cardview.widget.CardView>
 
-        <LinearLayout
+    <TextView
+        android:id="@+id/tv_full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/fl_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cv_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        tools:text="Full name" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cv_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_full_name"
+        tools:text="email@email.com" />
+
+    <FrameLayout
+        android:id="@+id/fl_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_avatar">
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="1dp"
+            android:background="#B9C1D9" />
 
-            <TextView
-                android:id="@+id/tv_full_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/montserrat_regular"
-                tools:text="Full name" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/s_night_theme_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Night theme"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
-                tools:text="email@email.com" />
+        <TextView
+            android:id="@+id/tv_night_theme_mode_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Switches the theme to black style, which is comfortable for the eyes in the dark"
+            android:textSize="12sp" />
+    </FrameLayout>
 
-        </LinearLayout>
+    <EditText
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:singleLine="true"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fl_switch" />
 
-    </LinearLayout>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

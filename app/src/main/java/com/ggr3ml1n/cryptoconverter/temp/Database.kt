@@ -12,5 +12,5 @@ class Database @Inject constructor() {
         2L to Profile(2, "Alexey", "Dmitriev", "alexey@dmitriev.ru", "alexey_dmitriev_ru")
     )
 
-    fun getProfileById(id: Long): Profile = profiles[id]!!
+    suspend fun getProfileById(id: Long) = profiles[id]!!
 }

@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.ggr3ml1n.cryptoconverter.R
 import com.ggr3ml1n.cryptoconverter.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel: ProfileViewModel by viewModels()
 
@@ -33,27 +34,32 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.currentProfile.onEach {
-            when (it) {
-                is ProfileViewModel.ProfileUiState.Success -> {
-                    with(binding) {
-                        tvFullName.text = it.profile.fullName
-                        tvEmail.text = it.profile.email
-                    }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+                .collect {
+                    updateUi(it)
                 }
+        }
 
-                is ProfileViewModel.ProfileUiState.Error -> {
-                    showErrorDialog()
-                }
+        binding.sNightThemeMode.setOnClickListener { viewModel.changeNightThemeMode(binding.sNightThemeMode.isChecked) }
 
-                else -> Unit
+        binding.textView.setOnEditorActionListener(TextView.OnEditorActionListener { textView, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.changeProfile(textView.text.toString().toLong())
+                return@OnEditorActionListener true
             }
-        }.launchIn(lifecycleScope)
 
-        lifecycleScope.launch {
-            viewModel.loadProfile(1)
-            delay(10000)
-            viewModel.loadProfile(2)
+            return@OnEditorActionListener false
+        })
+    }
+
+    private fun updateUi(state: ProfileUiState) {
+        with(binding) {
+            tvFullName.text = state.profile.fullName
+            tvEmail.text = state.profile.email
+
+            sNightThemeMode.isChecked = state.nightThemeMode
         }
     }
 
@@ -64,9 +70,5 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        fun newInstance() = ProfileFragment()
     }
 }
