@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -55,16 +56,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun updateUi(state: ProfileUiState) {
-        with(binding) {
-            tvFullName.text = state.profile.fullName
-            tvEmail.text = state.profile.email
+        if (state.error != null) {
+            showErrorDialog(state.error)
+            return
+        } else {
+            with(binding) {
+                tvFullName.text = state.profile.fullName
+                tvEmail.text = state.profile.email
 
-            sNightThemeMode.isChecked = state.nightThemeMode
+                sNightThemeMode.isChecked = state.nightThemeMode
+            }
         }
     }
 
-    private fun showErrorDialog() {
-        TODO("Not yet implemented")
+    private fun showErrorDialog(error: Throwable) {
+        Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

@@ -23,10 +23,19 @@ class ProfileViewModel @Inject constructor(
 
     private val _nightThemeModeFlow = userPreferencesRepository.nightThemeModeFlow
 
-    val combined = combine(_currentProfile, _nightThemeModeFlow) { currentProfile, nightThemeMode ->
-        _uiState.update {
-            it.copy(profile = currentProfile, nightThemeMode = nightThemeMode)
+    private val _combined =
+        combine(_currentProfile, _nightThemeModeFlow) { currentProfile, nightThemeMode ->
+            _uiState.value.copy(
+                profile = currentProfile,
+                nightThemeMode = nightThemeMode,
+                error = null
+            )
         }
+
+    init {
+        _combined.catch { error -> _uiState.update { it.copy(error = error) } }
+            .onEach { newState -> _uiState.value = newState }
+            .launchIn(viewModelScope)
     }
 
     fun changeNightThemeMode(nightThemeMode: Boolean) {
