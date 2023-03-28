@@ -2,9 +2,11 @@ package com.ggr3ml1n.cryptoconverter.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ggr3ml1n.cryptoconverter.model.Profile
 import com.ggr3ml1n.cryptoconverter.repository.ProfileRepository
 import com.ggr3ml1n.cryptoconverter.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,10 +20,14 @@ class ProfileViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
 
-    private val _currentProfile = userPreferencesRepository.profileIdFlow
+    private val eventChannel = Channel<ProfileEffect>(Channel.BUFFERED)
+    val profileEditEffect: Flow<ProfileEffect>
+        get() = eventChannel.receiveAsFlow()
+
+    private val _currentProfile: Flow<Profile> = userPreferencesRepository.profileIdFlow
         .transform { profileId -> emit(profileRepository.getCurrentProfile(profileId)) }
 
-    private val _nightThemeModeFlow = userPreferencesRepository.nightThemeModeFlow
+    private val _nightThemeModeFlow: Flow<Boolean> = userPreferencesRepository.nightThemeModeFlow
 
     private val _combined =
         combine(_currentProfile, _nightThemeModeFlow) { currentProfile, nightThemeMode ->
@@ -48,6 +54,12 @@ class ProfileViewModel @Inject constructor(
     fun changeProfile(id: Long) {
         viewModelScope.launch {
             userPreferencesRepository.updateUserId(id)
+        }
+    }
+
+    fun editProfile() {
+        viewModelScope.launch {
+            eventChannel.send(ProfileEffect.Success(_uiState.value.profile))
         }
     }
 }

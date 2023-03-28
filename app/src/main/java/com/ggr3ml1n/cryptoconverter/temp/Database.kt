@@ -7,10 +7,14 @@ import javax.inject.Singleton
 @Singleton
 class Database @Inject constructor() {
 
-    private val profiles: Map<Long, Profile> = mapOf(
+    private val profiles = mutableMapOf(
         1L to Profile(1, "Thomas", "Edison", "thomas@edison.ru", "thomas_edison_ru"),
         2L to Profile(2, "Alexey", "Dmitriev", "alexey@dmitriev.ru", "alexey_dmitriev_ru")
     )
 
     suspend fun getProfileById(id: Long) = profiles[id]!!
+
+    suspend fun save(profile: Profile) {
+        profiles[profile.id] = profile
+    }
 }

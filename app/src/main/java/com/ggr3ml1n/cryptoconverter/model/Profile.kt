@@ -9,12 +9,12 @@ import kotlinx.parcelize.Parcelize
 data class Profile(
     val id: Long,
     val firstName: String,
-    val secondName: String,
+    val lastName: String,
     val email: String,
     val password: String
 ) : Parcelable {
     constructor() : this(-1, "Thomas", "Edison", "thomas@edison.ru", "thomas_edison_ru")
 
     @IgnoredOnParcel
-    val fullName = "$firstName $secondName"
+    val fullName = "$firstName $lastName"
 }

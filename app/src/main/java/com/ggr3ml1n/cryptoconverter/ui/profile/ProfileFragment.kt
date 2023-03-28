@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.ggr3ml1n.cryptoconverter.R
 import com.ggr3ml1n.cryptoconverter.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,24 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.profileEditEffect
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+                .collect { effect ->
+                    when (effect) {
+                        is ProfileEffect.Success -> {
+                            findNavController().navigate(
+                                ProfileFragmentDirections.actionNavigationProfileToNavigationEditProfile(
+                                    profile = effect.profile
+                                )
+                            )
+                        }
+
+                        else -> Unit
+                    }
+                }
+        }
+
         binding.sNightThemeMode.setOnClickListener { viewModel.changeNightThemeMode(binding.sNightThemeMode.isChecked) }
 
         binding.textView.setOnEditorActionListener(TextView.OnEditorActionListener { textView, actionId, keyEvent ->
@@ -53,6 +72,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
             return@OnEditorActionListener false
         })
+
+        binding.editButton.setOnClickListener { viewModel.editProfile() }
     }
 
     private fun updateUi(state: ProfileUiState) {
